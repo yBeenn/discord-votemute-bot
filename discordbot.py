@@ -98,7 +98,7 @@ async def votemute(ctx, member: discord.Member, *, reason=None):
         for i in range(31):
 
             time.sleep(1)
-            
+
             if i != 30:
                 await msg.edit(content="> Votemute: Der Benutzer" + member.mention+ " wird gevotemuted. Reagiere mit ✅ um den votemute zuzustimmen. Mit ❌ dagegen. \n Verbleibende Zeit: "+str(29-i))
 
@@ -156,4 +156,4 @@ async def mutet (member, guild):
 
 
 
-client.run("ODEyMjY2MjMxNDQ0OTMwNTcx.YC-P4A.c61GUhZPxdHQfTECpE6qUhY50PU")
+client.run(os.getenv("TOKEN"))
