@@ -1,3 +1,4 @@
+from keep_alive import keep_alive
 import discord
 from discord.ext import commands
 import time
@@ -23,13 +24,13 @@ async def on_reaction_add(reaction, user):
         if reaction.emoji == "✅":
 
             votes[id] = votes[id] +1
-
+            
 
         elif reaction.emoji == "❌":
 
 
             votes[id] = votes[id] -1
-
+            
 
 
 
@@ -45,12 +46,12 @@ async def on_raw_reaction_remove(payload):
 
         if payload.emoji.name == "✅":
             votes[id] = votes[id] -1
-
+            
 
         elif payload.emoji.name == "❌":
 
             votes[id] = votes[id] +1
-
+            
 
 
 
@@ -65,7 +66,7 @@ async def ping(ctx):
 
 @client.command(description="Mutes the specified user.")
 #commands.has_permissions(manage_messages=True)
-async def votemute(ctx, member: discord.Member, *, reason=None):
+async def votekick(ctx, member: discord.Member, *, reason=None):
     global id
     global votes
 
@@ -128,14 +129,14 @@ async def votemute(ctx, member: discord.Member, *, reason=None):
     else:
         await ctx.message.delete()
         await ctx.author.send("> Es ist nur ein Votemute gleichzeitig möglich")
-
+        
 
 
 @client.command(description="Unmutes a specified user.")
 #@commands.has_permissions(manage_messages=True)
 async def unmute(ctx, member: discord.Member):
     mutedRole = discord.utils.get(ctx.guild.roles, name="Muted")
-
+    
     await member.remove_roles(mutedRole)
     await ctx.send(f"{member.mention} ist unmuted")
 
@@ -156,4 +157,8 @@ async def mutet (member, guild):
 
 
 
-client.run(os.getenv("TOKEN"))
+
+keep_alive()
+
+
+client.run(os.getenv("TOKEN"))  
